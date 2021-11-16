@@ -23,7 +23,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body className="font-mono text-gray-600">
           <Main />
           <NextScript />
         </body>
