@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.selected {
-    @apply w-56;
+.new-tech-input {
+    @apply px-2 py-1 text-white placeholder-gray-300 bg-dark bg-opacity-20 rounded-md;
 }

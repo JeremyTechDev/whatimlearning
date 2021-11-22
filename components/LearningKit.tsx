@@ -19,6 +19,7 @@ const LearningKit: FC<T> = ({ technologies }) => (
           height={tech.id === 56 ? 224 : 192}
           alt={tech.title}
           src={tech.cover_img}
+          loader={() => tech.cover_img}
         />
         <h5>{tech.title}</h5>
       </div>

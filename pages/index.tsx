@@ -10,7 +10,7 @@ interface T {
 }
 
 const Home: NextPage<T> = ({ technologies }) => {
-  return <LandingPage />;
+  // return <LandingPage />;
   return (
     <Layout>
       Just some title here
@@ -20,23 +20,25 @@ const Home: NextPage<T> = ({ technologies }) => {
 };
 
 export async function getServerSideProps() {
-  return { props: {} };
+  try {
+    const res = await fetch('http://127.0.0.1:8000/users/1/technologies');
+    const technologies = await res.json();
 
-  const res = await fetch('http://127.0.0.1:8000/technologies/');
-  const technologies = await res.json();
+    if (!technologies) {
+      return {
+        notFound: true,
+      };
+    }
 
-  if (!technologies) {
+    console.log(technologies);
     return {
-      notFound: true,
+      props: {
+        technologies: technologies.results,
+      },
     };
+  } catch (error) {
+    return { props: {} };
   }
-
-  console.log(technologies);
-  return {
-    props: {
-      technologies,
-    },
-  };
 }
 
 export default Home;

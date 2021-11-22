@@ -1,12 +1,19 @@
 const LandingPage = () => {
+  const handleLogin = async () => {
+    window.location.replace('http://127.0.0.1:8000/auth/twitter');
+  };
+
   return (
     <main className="flex h-screen w-screen justify-center items-center bg-gray-200">
       <section className="shadow-2xl lg:m-40 bg-gray-100 rounded">
         <div className="pt-12 px-12 flex items-center justify-between">
           <span className="text-4xl md:text-6xl">🚀</span>
-          <span className="bg-twitter text-sm md:text-base px-2 py-1 text-white rounded-lg">
+          <button
+            onClick={handleLogin}
+            className="bg-twitter text-sm md:text-base px-2 py-1 text-white rounded-lg"
+          >
             Sign in with Twitter
-          </span>
+          </button>
         </div>
 
         <div className="grid px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
