@@ -21,3 +21,16 @@ export interface Resource {
   is_free: boolean;
   technology: Technology;
 }
+
+export interface TechnologyCard {
+  title: string;
+  description: string;
+  language: string;
+  code: string;
+  image: string;
+}
+
+export interface ResourceCard {
+  url: string;
+  isFree: boolean;
+}
