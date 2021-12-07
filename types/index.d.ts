@@ -22,6 +22,15 @@ export interface Resource {
   technology: Technology;
 }
 
+export interface User {
+  id: number;
+  profile_background: string | null;
+  profile_image: string | null;
+  twitter_id: number | null;
+  twitter_name: string | null;
+  username: string;
+}
+
 export interface TechnologyCard {
   title: string;
   description: string;
@@ -33,4 +42,11 @@ export interface TechnologyCard {
 export interface ResourceCard {
   url: string;
   isFree: boolean;
+}
+
+export interface PaginationResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
 }

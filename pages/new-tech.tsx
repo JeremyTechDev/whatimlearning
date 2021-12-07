@@ -1,4 +1,5 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import NewResource from '../components/NewResource';
 import TechCard from '../components/TechCard';
 
@@ -8,6 +9,7 @@ type HandleChangeInput =
   | HTMLSelectElement;
 
 const NewTechForm = () => {
+  const { query } = useRouter();
   const [data, setData] = useState({
     code: '',
     description: '',
@@ -15,6 +17,24 @@ const NewTechForm = () => {
     language: 'TS',
     title: '',
   });
+
+  useEffect(() => {
+    const { oauth_token = '', oauth_verifier = '' } = query;
+
+    const getData = async () => {
+      const BASE_URL = 'http://127.0.0.1:8000/auth/twitter/callback';
+      const res = await fetch(
+        `${BASE_URL}?oauth_token=${oauth_token}&oauth_verifier=${oauth_verifier}`,
+      );
+      const data = await res.json();
+
+      console.log(data);
+    };
+
+    if (oauth_token && oauth_verifier) {
+      getData();
+    }
+  }, [query]);
 
   const handleChange: ChangeEventHandler<HandleChangeInput> = (event) => {
     const { name, value } = event.target;

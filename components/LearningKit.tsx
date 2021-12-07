@@ -8,7 +8,7 @@ interface T {
 
 const LearningKit: FC<T> = ({ technologies }) => (
   <section className="h-72 whitespace-nowrap overflow-x-auto">
-    {technologies.slice(1, 10).map((tech) => (
+    {technologies.slice(0, 10).map((tech) => (
       <div
         key={tech.id}
         className={`bg-gray-100 align-middle w-48 m-2 shadow-lg inline-block ${tech.id === 56 ? 'selected' : ''}`}
