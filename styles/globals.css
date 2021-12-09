@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.tech-card {
+    @apply bg-gray-100 align-middle w-48 mx-2 my-8 shadow-md inline-block cursor-pointer hover:shadow-lg transition-transform duration-500 ease-in-out;
+}
+
+.tech-card--active {
+    @apply shadow-lg transform scale-110;
+}
+
 .container {
     @apply px-2;
 }

@@ -4,11 +4,16 @@ import { PaginationResponse, User } from '../types';
 import UserCard from './UserCard';
 
 interface T {
-  users: PaginationResponse<User>;
   className?: string;
+  selected: User | null;
+  users: PaginationResponse<User>;
 }
 
-const UserBar: NextPage<T> = ({ users, className = '' }) => {
+const UserBar: NextPage<T> = ({
+  users,
+  selected,
+  className = '',
+}) => {
   return (
     <nav className={className}>
       <header className="p-4 pb-0 sticky top-0 bg-white z-10 shadow-lg">
@@ -28,11 +33,17 @@ const UserBar: NextPage<T> = ({ users, className = '' }) => {
 
       <section>
         {users.results.map((user) => (
-          <UserCard key={user.id} user={user} />
+          <UserCard
+            isSelected={user.id === selected?.id}
+            key={user.id}
+            user={user}
+          />
         ))}
       </section>
 
-      <footer className='p-4 text-sm text-center text-gray-400'>Amazing creators, right? We know 😎</footer>
+      <footer className="p-4 text-sm text-center text-gray-400">
+        Amazing creators, right? We know 😎
+      </footer>
     </nav>
   );
 };

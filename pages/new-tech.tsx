@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import NewResource from '../components/NewResource';
-import TechCard from '../components/TechCard';
+import NewTechCard from '../components/NewTechCard';
 
 type HandleChangeInput =
   | HTMLInputElement
@@ -113,7 +113,7 @@ const NewTechForm = () => {
           </p>
 
           <div className="col-span-12 md:col-span-3 md:row-span-6">
-            <TechCard details={data} />
+            <NewTechCard details={data} />
           </div>
         </div>
       </section>

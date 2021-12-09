@@ -15,7 +15,7 @@ const LinkCard: FC<T> = ({ resource, index }) =>
 
       <LinkPreview openInNewTab url={resource.url} />
 
-      {resource.isFree && (
+      {(resource.isFree) && (
         <span className="flex items-center justify-center m-2">
           <svg
             className="w-8 h-8"

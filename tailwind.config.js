@@ -15,7 +15,14 @@ module.exports = {
     fontFamily: {
       mono: ['Fira Code', 'monospace'],
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        width: 'width',
+      },
+      gridTemplateColumns: {
+        'landing-cards-grid': 'repeat(3, 208px)',
+      },
+    },
   },
   variants: {
     extend: {},
