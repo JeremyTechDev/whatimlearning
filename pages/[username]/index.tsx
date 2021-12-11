@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 
-import { PaginationResponse, User } from '../types';
-import Homepage from '../components/Homepage';
+import { PaginationResponse, User } from '../../types';
+import Homepage from '../../components/Homepage';
 
 interface T {
   users: PaginationResponse<User>;

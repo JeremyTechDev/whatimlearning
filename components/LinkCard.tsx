@@ -6,16 +6,25 @@ import { ResourceCard } from '../types';
 interface T {
   resource: ResourceCard;
   index: number;
+  editView?: boolean;
+  handleDelete?: () => void;
 }
 
-const LinkCard: FC<T> = ({ resource, index }) =>
+const LinkCard: FC<T> = ({ resource, index, editView = false, handleDelete }) =>
   resource.url ? (
     <article className="overflow-hidden">
-      <span className="font-bold">#{index + 1}</span>
+      <div className="font-bold flex items-center justify-between">
+        <span>#{index + 1}</span>
+        {editView && (
+          <button onClick={handleDelete} className="btn btn--red">
+            Delete
+          </button>
+        )}
+      </div>
 
       <LinkPreview openInNewTab url={resource.url} />
 
-      {(resource.isFree) && (
+      {resource.isFree && (
         <span className="flex items-center justify-center m-2">
           <svg
             className="w-8 h-8"

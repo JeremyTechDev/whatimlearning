@@ -18,7 +18,7 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
         selected={selectedUser}
       />
 
-      <MainLayout loggedUser={null} className="col-span-3 md:col-span-3 p-4 bg-gray-100 h-screen overflow-y-auto">
+      <MainLayout className="col-span-3 md:col-span-3 p-4 bg-gray-100 h-screen overflow-y-auto">
         {selectedUser ? (
           <LearningKit user={selectedUser} />
         ) : (

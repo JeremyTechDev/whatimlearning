@@ -2,31 +2,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import router from 'next/router';
 import type { GetServerSideProps, NextPage } from 'next';
+
 import { PaginationResponse, Technology } from '../types';
+import TwitterLoginBtn from '../components/TwitterLoginBtn';
 
 interface T {
   technologies: PaginationResponse<Technology>;
 }
 
 const LandingPage: NextPage<T> = ({ technologies }) => {
-  const handleLogin = async () => {
-    const res = await fetch('http://127.0.0.1:8000/auth/twitter');
-    const data = await res.json();
-
-    window.location.replace(data.redirect_to);
-  };
-
   return (
     <main className="flex h-screen w-screen justify-center items-center bg-gray-200">
       <section className="shadow-2xl lg:m-40 bg-gray-100 rounded">
         <div className="pt-12 px-12 flex items-center justify-between">
           <span className="text-4xl md:text-6xl">🚀</span>
-          <button
-            onClick={handleLogin}
-            className="bg-twitter text-sm md:text-base px-2 py-1 text-white rounded-lg"
-          >
-            Sign in with Twitter
-          </button>
+
+          <TwitterLoginBtn />
         </div>
 
         <div className="grid px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
@@ -85,7 +76,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
           </section>
         </div>
 
-       <div className="text-right pb-4 pr-6">
+        <div className="text-right pb-4 pr-6">
           Crafted with ♥️ by{' '}
           <a
             href="https://twitter.com/AskJere"

@@ -49,3 +49,16 @@ export interface PaginationResponse<T> {
   previous: string | null;
   results: T[];
 }
+
+export interface AuthResponse {
+  auth_token: string;
+  created: boolean;
+  id: number;
+  profile_background: string;
+  profile_image: string;
+  twitter_id: number;
+  twitter_name: string;
+  username: string;
+}
+
+export type AuthData = AuthResponse | null;

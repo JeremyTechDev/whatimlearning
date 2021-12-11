@@ -1,7 +1,9 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { ChangeEventHandler, useState } from 'react';
+
+import { IsLoading, LoginRequired } from '../components/Helpers';
 import NewResource from '../components/NewResource';
 import NewTechCard from '../components/NewTechCard';
+import useAuth from '../hooks/useAuth';
 
 type HandleChangeInput =
   | HTMLInputElement
@@ -9,7 +11,7 @@ type HandleChangeInput =
   | HTMLSelectElement;
 
 const NewTechForm = () => {
-  const { query } = useRouter();
+  const [isLoading, userData] = useAuth();
   const [data, setData] = useState({
     code: '',
     description: '',
@@ -18,28 +20,13 @@ const NewTechForm = () => {
     title: '',
   });
 
-  useEffect(() => {
-    const { oauth_token = '', oauth_verifier = '' } = query;
-
-    const getData = async () => {
-      const BASE_URL = 'http://127.0.0.1:8000/auth/twitter/callback';
-      const res = await fetch(
-        `${BASE_URL}?oauth_token=${oauth_token}&oauth_verifier=${oauth_verifier}`,
-      );
-      const data = await res.json();
-
-      console.log(data);
-    };
-
-    if (oauth_token && oauth_verifier) {
-      getData();
-    }
-  }, [query]);
-
   const handleChange: ChangeEventHandler<HandleChangeInput> = (event) => {
     const { name, value } = event.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
+
+  if (isLoading) return <IsLoading />;
+  if (!userData?.id) return <LoginRequired />;
 
   return (
     <main className="mt-20">

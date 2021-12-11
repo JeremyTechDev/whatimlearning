@@ -1,20 +1,34 @@
-import Image from 'next/image';
 import { FC, useEffect, useState } from 'react';
+import handleDelete from '../helpers/handleDelete';
 import ExternalLink from '../icons/ExternalLink';
-import { PaginationResponse, Technology, User } from '../types';
+import { PaginationResponse, Resource, Technology, User } from '../types';
+import { IsLoading, NoTechnologies } from './Helpers';
 import LinkCard from './LinkCard';
 import TechCard from './TechCard';
 
 interface T {
   user: User | null;
+  editView?: boolean;
 }
 
-const LearningKit: FC<T> = ({ user }) => {
+const LearningKit: FC<T> = ({ user, editView = false }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState<null | Technology>(null);
   const [technologies, setTechnologies] = useState<
     PaginationResponse<Technology>
   >({ count: 0, results: [], previous: null, next: null });
+
+  const handleDeleteTech = (tech: Technology) => {
+    const confirmationMessage = `Are you sure you want to remove the ${tech.title} learning kit?\nThis will remove all its resources as as well and cannot be undone.`;
+    const url = `http://127.0.0.1:8000/users/${tech.user.id}/technologies/${tech.id}/`;
+    handleDelete(confirmationMessage, url);
+  };
+
+  const handleDeleteResource = (tech: Technology, resource: Resource) => {
+    const confirmationMessage = `Are you sure you want to remove this resource?\nThis action cannot be undone.`;
+    const url = `http://127.0.0.1:8000/users/${tech.user.id}/technologies/${tech.id}/resources/${resource.id}/`;
+    handleDelete(confirmationMessage, url);
+  };
 
   useEffect(() => {
     if (user) {
@@ -32,38 +46,10 @@ const LearningKit: FC<T> = ({ user }) => {
     }
   }, [user]);
 
-  // Loading screen
-  if (isLoading) {
-    return (
-      <div className="flex h-96 items-center justify-center flex-col">
-        <p className="text-8xl">⏱</p>
-        <p className="text-4xl">Loading...</p>
-      </div>
-    );
-  }
+  if (isLoading) return <IsLoading />;
 
   // No technologies screen
-  if (technologies.count === 0) {
-    return (
-      <div className="flex h-96 items-center justify-center flex-col">
-        <p className="text-8xl">🤷‍♂️</p>
-        <p className="text-4xl">Nothing in here</p>
-        <p className="text-xl">
-          Tell{' '}
-          <a
-            className="text-red hover:underline"
-            href={`https://twitter.com/intent/tweet?screen_name=${user?.username}`}
-            rel="noreferrer"
-            target="_blank"
-          >
-            @{user?.username}
-            <ExternalLink size="5" />
-          </a>{' '}
-          to share what they are learning on Twitter.
-        </p>
-      </div>
-    );
-  }
+  if (technologies.count === 0) return <NoTechnologies user={user} />;
 
   return (
     <div className="z-50">
@@ -82,12 +68,14 @@ const LearningKit: FC<T> = ({ user }) => {
       </h1>
 
       <section className="whitespace-nowrap overflow-x-auto ">
-        {technologies?.results.map((tech, i) => (
+        {technologies.results.map((tech) => (
           <TechCard
             key={tech.id}
             isSelected={tech.id === selected?.id}
             onClick={() => setSelected(tech)}
             technology={tech}
+            editView={editView}
+            handleDelete={() => handleDeleteTech(tech)}
           />
         ))}
       </section>
@@ -101,6 +89,8 @@ const LearningKit: FC<T> = ({ user }) => {
               index={i}
               key={resource.id}
               resource={{ ...resource, isFree: resource.is_free }}
+              editView={editView}
+              handleDelete={() => handleDeleteResource(selected, resource)}
             />
           ))}
         </section>

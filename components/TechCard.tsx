@@ -6,9 +6,17 @@ interface T {
   technology: Technology;
   isSelected?: boolean;
   onClick?: () => void;
+  editView?: boolean;
+  handleDelete?: () => void;
 }
 
-const TechCard: FC<T> = ({ technology, isSelected, onClick }) => {
+const TechCard: FC<T> = ({
+  technology,
+  isSelected,
+  onClick,
+  editView = false,
+  handleDelete,
+}) => {
   return (
     <figure
       onClick={onClick}
@@ -23,6 +31,11 @@ const TechCard: FC<T> = ({ technology, isSelected, onClick }) => {
         width={isSelected ? 224 : 192}
       />
       <figcaption>{technology.title}</figcaption>
+      {editView && (
+        <button onClick={handleDelete} className="btn btn--red w-full">
+          Delete
+        </button>
+      )}
     </figure>
   );
 };
