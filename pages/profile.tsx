@@ -1,22 +1,13 @@
 import Image from 'next/image';
-import { GetServerSideProps, NextPage } from 'next';
 
-import {
-  IsLoading,
-  LoginRequired,
-  NotYourProfile,
-} from '../../components/Helpers';
-import useAuth from '../../hooks/useAuth';
-import { User } from '../../types';
-import LearningKit from '../../components/LearningKit';
-import { logout } from '../../helpers/login';
-import handleDelete from '../../helpers/handleDelete';
+import { IsLoading, LoginRequired } from '../components/Helpers';
+import useAuth from '../hooks/useAuth';
+import { User } from '../types';
+import LearningKit from '../components/LearningKit';
+import { logout } from '../helpers/login';
+import handleDelete from '../helpers/handleDelete';
 
-interface T {
-  user: User | null;
-}
-
-const Profile: NextPage<T> = ({ user }) => {
+const Profile = () => {
   const [isLoading, userData] = useAuth();
 
   const handleDeleteAccount = (user: User) => {
@@ -28,11 +19,6 @@ const Profile: NextPage<T> = ({ user }) => {
 
   if (isLoading) return <IsLoading />;
   if (!userData?.id) return <LoginRequired />;
-
-  // If user tries to access another user's profile
-  if (!user || user.id !== userData.id) {
-    return <NotYourProfile profileHref={`/${userData.username}/profile`} />;
-  }
 
   return (
     <main className="container mx-auto">
@@ -53,14 +39,16 @@ const Profile: NextPage<T> = ({ user }) => {
       </section>
 
       <section className="flex justify-between my-8">
-        <button className="btn btn--dark">New Learning Stack</button>
+        <a href="/new-tech" className="btn btn--dark">
+          New Learning Stack
+        </a>
 
         <span className="grid grid-cols-2 gap-2">
           <button onClick={logout} className="btn btn--red">
             Log out
           </button>
           <button
-            onClick={() => handleDeleteAccount(user)}
+            onClick={() => handleDeleteAccount(userData)}
             className="btn btn--red"
           >
             Close account
@@ -72,24 +60,10 @@ const Profile: NextPage<T> = ({ user }) => {
         <h2 className="text-2xl">This is how your page looks 👇</h2>
         <hr className="my-4" />
 
-        <LearningKit user={user} editView />
+        <LearningKit user={userData} editView />
       </section>
     </main>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  try {
-    const res = await fetch(`http://127.0.0.1:8000/user/${params?.username}`);
-    const user = await res.json();
-
-    return {
-      props: {
-        user,
-      },
-    };
-  } catch (error) {
-    return { props: {} };
-  }
-};
 export default Profile;

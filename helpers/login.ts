@@ -18,19 +18,16 @@ export const handleLogin = async (query: AuthQuery): Promise<AuthData> => {
     try {
       const token = query.oauth_token;
       const verifier = query.oauth_verifier;
+
+      // remove auth params from url
+      window?.history?.pushState({}, document.title, window.location.pathname);
+
       const res = await fetch(
         `http://127.0.0.1:8000/auth/twitter/callback?oauth_token=${token}&oauth_verifier=${verifier}`,
       );
       userData = await res.json();
       if (userData && userData.auth_token) {
         localStorage.setItem('auth-token', userData.auth_token);
-
-        // remove auth params from url
-        window?.history?.pushState(
-          {},
-          document.title,
-          window.location.pathname,
-        );
       }
     } catch (error) {
       userData = null;
