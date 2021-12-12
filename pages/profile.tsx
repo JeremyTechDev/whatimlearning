@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 import { IsLoading, LoginRequired } from '../components/Helpers';
@@ -40,9 +41,9 @@ const Profile = () => {
       </section>
 
       <section className="flex justify-between my-8">
-        <a href="/new-tech" className="btn btn--dark">
-          New Learning Stack
-        </a>
+        <Link href="/new-tech">
+          <a className="btn btn--dark">New Learning Stack</a>
+        </Link>
 
         <span className="grid grid-cols-2 gap-2">
           <button onClick={logout} className="btn btn--red">

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import router from 'next/router';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { PaginationResponse, Technology } from '../types';
@@ -50,28 +49,30 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
 
             <section className="grid grid-cols-landing-cards-grid gap-2">
               {technologies.results.map((tech) => (
-                <article
-                  className="flex items-end w-36 md:w-52 h-36 md:h-52 m-0 bg-gray-200 bg-cover bg-center cursor-pointer"
-                  key={tech.id}
-                  onClick={() => router.push(`/${tech.user.username}`)}
-                  style={{ backgroundImage: `url(${tech.cover_img})` }}
-                >
-                  <figure className="w-full flex items-center p-1 bg-gradient-to-t from-gray-800">
-                    <Image
-                      alt={tech.user.username}
-                      className="rounded-full"
-                      height={65}
-                      objectFit="cover"
-                      objectPosition="center center"
-                      src={tech.user.profile_image || DEFAULT_USER_IMAGE}
-                      unoptimized
-                      width={65}
-                    />
-                    <figcaption className="text-white text-sm ml-2">
-                      @{tech.user.username}
-                    </figcaption>
-                  </figure>
-                </article>
+                <Link href={`/${tech.user.username}`} key={tech.id} passHref>
+                  <a>
+                    <article
+                      className="flex items-end w-36 md:w-52 h-36 md:h-52 m-0 bg-gray-200 bg-cover bg-center cursor-pointer"
+                      style={{ backgroundImage: `url(${tech.cover_img})` }}
+                    >
+                      <figure className="w-full flex items-center p-1 bg-gradient-to-t from-gray-800">
+                        <Image
+                          alt={tech.user.username}
+                          className="rounded-full"
+                          height={65}
+                          objectFit="cover"
+                          objectPosition="center center"
+                          src={tech.user.profile_image || DEFAULT_USER_IMAGE}
+                          unoptimized
+                          width={65}
+                        />
+                        <figcaption className="text-white text-sm ml-2">
+                          @{tech.user.username}
+                        </figcaption>
+                      </figure>
+                    </article>
+                  </a>
+                </Link>
               ))}
             </section>
           </section>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FC } from 'react';
 import ExternalLink from '../icons/ExternalLink';
 import { User } from '../types';
@@ -26,9 +27,9 @@ export const NotYourProfile: FC<{ profileHref: string }> = ({
   <section className="container mx-auto my-40 text-center">
     <p className="text-8xl">🤔</p>
     <p className="text-4xl my-4">Looks like this is not your profile page</p>
-    <a href={profileHref} className="btn btn--red cursor-pointer">
-      Go to your profile
-    </a>
+    <Link href={profileHref}>
+      <a className="btn btn--red cursor-pointer">Go to your profile</a>
+    </Link>
   </section>
 );
 
