@@ -6,6 +6,7 @@ import { User } from '../types';
 import LearningKit from '../components/LearningKit';
 import { logout } from '../helpers/login';
 import handleDelete from '../helpers/handleDelete';
+import { DEFAULT_USER_IMAGE } from '../helpers/constants';
 
 const Profile = () => {
   const [isLoading, userData] = useAuth();
@@ -28,12 +29,12 @@ const Profile = () => {
         <div className="text-xl flex items-center">
           <h2 className="mr-4">Logged as @{userData.username}</h2>
           <Image
-            src={userData.profile_image || 'image'}
             alt={userData.username}
-            width={65}
-            height={65}
             className="rounded-full"
-            loader={({ src }) => src}
+            height={65}
+            src={userData.profile_image || DEFAULT_USER_IMAGE}
+            unoptimized
+            width={65}
           />
         </div>
       </section>

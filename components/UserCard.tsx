@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import router from 'next/router';
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
+import { DEFAULT_USER_IMAGE } from '../helpers/constants';
 import ExternalLink from '../icons/ExternalLink';
 import { User } from '../types';
 
@@ -8,9 +9,6 @@ interface T {
   user: User;
   isSelected: boolean;
 }
-
-const DEFAULT_IMAGE =
-  'https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png';
 
 const UserCard: FC<T> = ({ user, isSelected = false }) => {
   return (
@@ -22,12 +20,12 @@ const UserCard: FC<T> = ({ user, isSelected = false }) => {
     >
       <figure>
         <Image
-          alt={user.twitter_name || 'missing twitter name'}
+          alt={user.username}
           className="rounded-full"
           height={75}
-          loader={({ src }) => src}
           objectFit="cover"
-          src={user.profile_image || DEFAULT_IMAGE}
+          src={user.profile_image || DEFAULT_USER_IMAGE}
+          unoptimized
           width={75}
         />
       </figure>

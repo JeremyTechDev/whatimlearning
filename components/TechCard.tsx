@@ -22,14 +22,21 @@ const TechCard: FC<T> = ({
       onClick={onClick}
       className={`tech-card ${isSelected ? 'tech-card--active' : ''}`}
     >
-      <Image
-        alt={technology.title}
-        className="object-cover"
-        height={isSelected ? 224 : 192}
-        loader={() => technology.cover_img}
-        src={technology.cover_img}
-        width={isSelected ? 224 : 192}
-      />
+      {technology.cover_img ? (
+        <Image
+          alt={technology.title}
+          className="object-cover"
+          height={isSelected ? 224 : 192}
+          src={technology.cover_img}
+          unoptimized
+          width={isSelected ? 224 : 192}
+        />
+      ) : (
+        <div className="h-56 flex flex-col items-center justify-center">
+          <p className="text-6xl">🖼</p>
+          <p>No Image</p>
+        </div>
+      )}
       <figcaption>{technology.title}</figcaption>
       {editView && (
         <button onClick={handleDelete} className="btn btn--red w-full">
