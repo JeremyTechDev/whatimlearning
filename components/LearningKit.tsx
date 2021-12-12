@@ -82,7 +82,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
 
       {selected === null ? (
         <p className="text-xl">Click 👆 to see more!</p>
-      ) : (
+      ) : selected.resources.length ? (
         <section className="mb-6 grid gap-4 lg:grid-cols-3">
           {selected.resources.map((resource, i) => (
             <LinkCard
@@ -94,6 +94,10 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
             />
           ))}
         </section>
+      ) : (
+        <p className="text-xl my-4">
+          🤷‍♂️ @{user?.username} has not added any resources yet
+        </p>
       )}
     </div>
   );
