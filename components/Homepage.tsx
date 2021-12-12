@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { NextPage } from 'next';
 import { User, PaginationResponse } from '../types';
 import LearningKit from './LearningKit';
@@ -19,6 +20,13 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
       />
 
       <MainLayout className="col-span-3 md:col-span-3 p-4 bg-gray-100 h-screen overflow-y-auto">
+        <p className="flex justify-end items-center">
+          Want to share your Learning Kit too?
+          <Link href="/profile">
+            <a className="btn btn--dark ml-2">Login</a>
+          </Link>
+        </p>
+
         {selectedUser ? (
           <LearningKit user={selectedUser} />
         ) : (

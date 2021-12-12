@@ -23,12 +23,14 @@ const Profile = () => {
   if (!userData?.id) return <LoginRequired />;
 
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto mt-4">
       <section className="flex items-center justify-between">
-        <h1 className="text-4xl">Profile</h1>
+        <h1 className="text-4xl">Profile 👩‍💻👨‍💻</h1>
 
         <div className="text-xl flex items-center">
-          <h2 className="mr-4">Logged as @{userData.username}</h2>
+          <h2 className="mr-4">
+            Logged as <span className="font-bold">@{userData.username}</span>
+          </h2>
           <Image
             alt={userData.username}
             className="rounded-full"
@@ -42,7 +44,7 @@ const Profile = () => {
 
       <section className="flex justify-between my-8">
         <Link href="/new-tech">
-          <a className="btn btn--dark">New Learning Stack</a>
+          <a className="btn btn--filled--dark">Publish new Learning Kit 🚀</a>
         </Link>
 
         <span className="grid grid-cols-2 gap-2">

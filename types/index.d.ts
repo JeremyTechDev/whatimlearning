@@ -1,16 +1,12 @@
-export interface FeaturedCode {
-  id: number;
-  code: string;
-  language: string;
+export interface NewTechnology {
+  title: string;
+  cover_img: string;
 }
-
 export interface Technology {
   id: number;
   title: string;
-  description: string;
   cover_img: string;
   last_update: string;
-  featured_code: FeaturedCode;
   resources: [Resource];
   user: User;
 }

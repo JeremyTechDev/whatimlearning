@@ -39,10 +39,10 @@ const NewResource = () => {
 
   return (
     <section className="container mx-auto">
-      <h2 className="text-3xl">Resources</h2>
+      <h2 className="text-3xl">Resources 🌐</h2>
 
       <h5 className="text-lg">
-        Add links to the resources you are using to learn...
+        Add links to the resources you are using to learn
       </h5>
 
       <section className="my-8">
@@ -55,7 +55,10 @@ const NewResource = () => {
 
         {resources.map((resource, index) => {
           return (
-            <div key={keyCount++} className="grid grid-cols-12 gap-2 my-4">
+            <div
+              key={keyCount++}
+              className="grid grid-cols-12 gap-2 my-4 items-center"
+            >
               <p className="col-span-1 text-right">#{index + 1}</p>
               <input
                 className="col-span-9 border rounded"
@@ -71,21 +74,18 @@ const NewResource = () => {
                 onChange={(e) => handleChange(e, index)}
               />
               <button
-                title="Remove item"
-                className="col-span-1 border h-7 w-7 rounded hover:bg-gray-200"
+                className="btn btn--red"
                 onClick={() => handleRemoveResource(index)}
+                title="Remove item"
               >
-                x
+                Remove
               </button>
             </div>
           );
         })}
 
-        <button
-          className="border rounded border-light px-2 py-1 text-xl hover:bg-light hover:text-white"
-          onClick={handleNewResource}
-        >
-          Add new Resource
+        <button className="btn btn--dark" onClick={handleNewResource}>
+          Add new Resource ➕
         </button>
       </section>
 

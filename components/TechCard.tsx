@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import { Technology } from '../types';
+import { NewTechnology, Technology } from '../types';
 
 interface T {
-  technology: Technology;
+  technology: Technology | NewTechnology;
   isSelected?: boolean;
   onClick?: () => void;
   editView?: boolean;

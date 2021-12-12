@@ -2,7 +2,7 @@ import { ChangeEventHandler, useState } from 'react';
 
 import { IsLoading, LoginRequired } from '../components/Helpers';
 import NewResource from '../components/NewResource';
-import NewTechCard from '../components/NewTechCard';
+import TechCard from '../components/TechCard';
 import useAuth from '../hooks/useAuth';
 
 type HandleChangeInput =
@@ -13,10 +13,7 @@ type HandleChangeInput =
 const NewTechForm = () => {
   const [isLoading, userData] = useAuth();
   const [data, setData] = useState({
-    code: '',
-    description: '',
-    image: '',
-    language: 'TS',
+    cover_img: '',
     title: '',
   });
 
@@ -31,7 +28,7 @@ const NewTechForm = () => {
   return (
     <main className="mt-20">
       <header className="container mx-auto">
-        <h1 className="text-4xl">New Technology</h1>
+        <h1 className="text-4xl">New Learning Kit 🚀</h1>
         <h4 className="text-xl">
           Show <span className="text-red">your audience</span> what you are
           learning and help them find your{' '}
@@ -39,69 +36,30 @@ const NewTechForm = () => {
         </h4>
       </header>
 
-      <section className="py-8 my-8 bg-light w-screen">
-        <div className="bg-dark bg-opacity-20 container rounded-3xl mx-auto p-4 lg:p-8 grid grid-cols-12 md:grid-rows-4 gap-y-4 md:gap-x-4 lg:gap-x-8">
-          <p className="text-white text-xl col-span-12 md:col-span-6">
-            Tech Details:
-          </p>
+      <section className="py-8 my-8 bg-light w-screen flex items-center justify-center gap-12">
+        <div className="w-2/5 bg-dark bg-opacity-20 rounded px-8 py-6 grid gap-6">
+          <p className="text-white text-xl">Learning Kit details:</p>
 
           <input
-            className="col-span-12 md:col-span-6 new-tech-input"
+            className="new-tech-input"
             name="title"
             onChange={handleChange}
-            placeholder="What are you learning?"
+            placeholder="What are you learning? 🤔"
             value={data.title}
-          />
-
-          <textarea
-            className="col-span-12 md:col-span-6 md:row-start-3 md:row-span-2 new-tech-input resize-none"
-            defaultValue={data.description}
-            name="description"
-            onChange={handleChange}
-            placeholder={`Briefly tell your audience why you are learning ${
-              data.title || '...'
-            }`}
+            maxLength={50}
           />
 
           <input
-            className="col-span-12 md:col-span-6 md:row-start-5 new-tech-input"
-            name="image"
+            className="new-tech-input"
+            name="cover_img"
             onChange={handleChange}
-            placeholder="Image URL (we still don't support uploads :c)"
-            value={data.image}
+            placeholder="Image URL (we still don't support uploads ☹️)"
+            value={data.cover_img}
           />
+        </div>
 
-          <p className="text-white text-xl col-span-12 md:col-span-3 md:col-start-7 md:row-start-1">
-            Show off some code:
-          </p>
-
-          <select
-            className="col-span-12 md:col-span-3 new-tech-input"
-            defaultValue={data.language}
-            id="language"
-            name="language"
-            onChange={handleChange}
-          >
-            <option value="JS">JavaScript</option>
-            <option value="TS">TypeScript</option>
-            <option value="PY">Python</option>
-          </select>
-
-          <textarea
-            className="col-span-12 md:col-span-3 md:row-span-3 md:row-start-3 new-tech-input resize-none"
-            defaultValue={data.code}
-            name="code"
-            onChange={handleChange}
-            placeholder="console.log('Show off some code here');"
-          />
-
-          <p className="text-white text-xl col-span-12 md:col-span-3 md:col-start-10 md:row-start-1">
-            Preview:
-          </p>
-
-          <div className="col-span-12 md:col-span-3 md:row-span-6">
-            <NewTechCard details={data} />
-          </div>
+        <div className="w-1/5">
+          <TechCard technology={data} />
         </div>
       </section>
 

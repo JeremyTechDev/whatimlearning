@@ -29,3 +29,11 @@
 .btn--dark {
   @apply text-dark border-dark hover:bg-dark;
 }
+
+.btn--light {
+  @apply text-light border-light hover:bg-light;
+}
+
+.btn--filled--dark {
+  @apply text-white border-dark bg-dark hover:text-dark hover:bg-white;
+}
