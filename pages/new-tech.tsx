@@ -63,7 +63,7 @@ const NewTechForm = () => {
         </div>
       </section>
 
-      <NewResource />
+      <NewResource newTechnology={data} userData={userData} />
     </main>
   );
 };

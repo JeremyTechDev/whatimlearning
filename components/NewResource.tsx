@@ -1,14 +1,21 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
+import router from 'next/router';
 
 import LinkCard from './LinkCard';
-import { ResourceCard } from '../types';
+import { NewTechnology, ResourceCard, User } from '../types';
+import validateNewResource from '../helpers/validateNewResource';
 
 const DEFAULT_RESOURCE: ResourceCard = {
   isFree: false,
   url: '',
 };
 
-const NewResource = () => {
+interface T {
+  newTechnology: NewTechnology;
+  userData: User;
+}
+
+const NewResource: FC<T> = ({ newTechnology, userData }) => {
   let keyCount = 0;
   const [resources, setResources] = useState<ResourceCard[]>([
     DEFAULT_RESOURCE,
@@ -37,6 +44,43 @@ const NewResource = () => {
     setResources(newResources);
   };
 
+  const handleSubmit = () => {
+    const { isValid, message } = validateNewResource(newTechnology, resources);
+    if (!isValid) return alert(message);
+
+    fetch(`http://127.0.0.1:8000/users/${userData.id}/technologies/`, {
+      method: 'POST',
+      body: JSON.stringify(newTechnology),
+      headers: {
+        Authorization: `Token ${localStorage.getItem('auth-token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        fetch(
+          `http://127.0.0.1:8000/users/${userData.id}/technologies/${data.id}/resources/`,
+          {
+            method: 'POST',
+            body: JSON.stringify(resources),
+            headers: {
+              Authorization: `Token ${localStorage.getItem('auth-token')}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        ),
+      )
+      .then((res) => res.json())
+      .then((data) => {
+        alert('Learning kit published! 🚀');
+        router.push('/profile');
+      })
+      .catch((e) => {
+        alert('Ops! Something went wrong 😅 Try again later');
+        console.error(e);
+      });
+  };
+
   return (
     <section className="container mx-auto">
       <h2 className="text-3xl">Resources 🌐</h2>
@@ -61,7 +105,7 @@ const NewResource = () => {
             >
               <p className="col-span-1 text-right">#{index + 1}</p>
               <input
-                className="col-span-9 border rounded"
+                className="col-span-9 border rounded p-1"
                 name="url"
                 onChange={(e) => handleChange(e, index)}
                 type="url"
@@ -93,6 +137,15 @@ const NewResource = () => {
         {resources.map((resource, index) => (
           <LinkCard key={keyCount++} resource={resource} index={index} />
         ))}
+      </div>
+
+      <div className="flex flex-col items-end">
+        <button
+          className="btn btn--filled--dark text-xl my-4"
+          onClick={handleSubmit}
+        >
+          Publish ✈️
+        </button>
       </div>
     </section>
   );
