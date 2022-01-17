@@ -1,4 +1,6 @@
 import { FC, useEffect, useState } from 'react';
+
+import handleFetch from '../helpers/fetch';
 import handleDelete from '../helpers/handleDelete';
 import ExternalLink from '../icons/ExternalLink';
 import { PaginationResponse, Resource, Technology, User } from '../types';
@@ -20,29 +22,27 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
 
   const handleDeleteTech = (tech: Technology) => {
     const confirmationMessage = `Are you sure you want to remove the ${tech.title} learning kit?\nThis will remove all its resources as as well and cannot be undone.`;
-    const url = `http://127.0.0.1:8000/users/${tech.user.id}/technologies/${tech.id}/`;
+    const url = `/users/${tech.user.id}/technologies/${tech.id}/`;
     handleDelete(confirmationMessage, url);
   };
 
   const handleDeleteResource = (tech: Technology, resource: Resource) => {
     const confirmationMessage = `Are you sure you want to remove this resource?\nThis action cannot be undone.`;
-    const url = `http://127.0.0.1:8000/users/${tech.user.id}/technologies/${tech.id}/resources/${resource.id}/`;
+    const url = `/users/${tech.user.id}/technologies/${tech.id}/resources/${resource.id}/`;
     handleDelete(confirmationMessage, url);
   };
 
   useEffect(() => {
     if (user) {
       setIsLoading(true);
-      fetch(`http://127.0.0.1:8000/users/${user.id}/technologies`)
-        .then((res) => res.json())
+      handleFetch({
+        url: `/users/${user.id}/technologies`,
+      })
         .then((data) => {
           setTechnologies(data);
           setIsLoading(false);
         })
-        .catch((err) => {
-          setIsLoading(false);
-          console.error(err);
-        });
+        .catch(() => setIsLoading(false));
     }
   }, [user]);
 

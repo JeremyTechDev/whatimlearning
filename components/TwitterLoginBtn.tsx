@@ -1,9 +1,13 @@
+import handleFetch from '../helpers/fetch';
+
 const TwitterLoginBtn = () => {
   const handleLogin = async () => {
-    const res = await fetch('http://127.0.0.1:8000/auth/twitter');
-    const data = await res.json();
-
-    window.location.replace(data.redirect_to);
+    try {
+      const data = await handleFetch({ url: '/auth/twitter' });
+      window.location.replace(data.redirect_to);
+    } catch (error) {
+      alert('Ops! Something went wrong ☹️ Try again later');
+    }
   };
 
   return (

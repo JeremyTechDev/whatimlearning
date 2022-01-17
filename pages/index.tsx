@@ -5,6 +5,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { PaginationResponse, Technology } from '../types';
 import TwitterLoginBtn from '../components/TwitterLoginBtn';
 import { DEFAULT_USER_IMAGE } from '../helpers/constants';
+import handleFetch from '../helpers/fetch';
 
 interface T {
   technologies: PaginationResponse<Technology>;
@@ -48,7 +49,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
             </div>
 
             <section className="grid grid-cols-landing-cards-grid gap-2">
-              {technologies.results.map((tech) => (
+              {technologies?.results.map((tech) => (
                 <Link href={`/${tech.user.username}`} key={tech.id} passHref>
                   <a>
                     <article
@@ -96,8 +97,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const res = await fetch('http://127.0.0.1:8000/technologies/?random=1');
-    const technologies = await res.json();
+    const technologies = await handleFetch({ url: '/technologies/?random=1' });
 
     return {
       props: {

@@ -1,3 +1,5 @@
+import handleFetch from './fetch';
+
 /**
  * Confirm if a user wants to delete an object and sends
  * the DELETE request if confirmation is accepted.
@@ -9,18 +11,13 @@ const handleDelete = (confirmationMessage: string, url: string) => {
   const confirmation = confirm(confirmationMessage);
 
   if (confirmation) {
-    fetch(url, {
+    handleFetch({
+      url,
       method: 'DELETE',
-      headers: {
-        Authorization: `Token ${localStorage.getItem('auth-token')}`,
-      },
+      includeToken: true,
     })
-      .then((res) => {
-        if (res.status === 204) {
-          alert('Deleted!\nRefresh page to see the changes.');
-        }
-      })
-      .catch((e) => console.error(e));
+      .then(() => alert('Deleted!\nRefresh page to see the changes.'))
+      .catch(() => alert('Ops! Something went wrong there'));
   }
 };
 

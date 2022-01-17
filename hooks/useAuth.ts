@@ -21,7 +21,7 @@ const useAuth = (): [boolean, User | null] => {
       if (query && query.oauth_token && query.oauth_verifier) {
         setUserData(await handleLogin(query));
       } else if (token) {
-        setUserData(await getAuthData(token));
+        setUserData(await getAuthData());
       }
 
       setIsLoading(false);

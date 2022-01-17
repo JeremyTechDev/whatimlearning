@@ -4,6 +4,7 @@ import { PaginationResponse, User } from '../types';
 import debounce from 'lodash.debounce';
 
 import UserCard from './UserCard';
+import handleFetch from '../helpers/fetch';
 
 interface T {
   className?: string;
@@ -18,8 +19,7 @@ const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
 
-    fetch(`http://127.0.0.1:8000/users/?q=${query}`)
-      .then((res) => res.json())
+    handleFetch({ url: `/users/?q=${query}` })
       .then((data) => {
         if (data.count) {
           setRenderedUsers(data);
@@ -29,7 +29,7 @@ const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
           setNotFound(true);
         }
       })
-      .catch((e) => setRenderedUsers(users));
+      .catch(() => setRenderedUsers(users));
   };
 
   const debouncedChangeHandler = debounce(handleChange, 300);
@@ -37,7 +37,7 @@ const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
   return (
     <nav className={className}>
       <header className="p-4 pb-0 sticky top-0 bg-white z-10 shadow-lg">
-        <p className="text-center text-2xl">whatImLearning</p>
+        <p className="text-center text-2xl">whatImLearning 🚀</p>
         <p className="text-center text-xs px-2">
           Find out what your{' '}
           <span className="text-red font-semibold">favorite creators</span> are

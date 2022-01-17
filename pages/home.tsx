@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 
 import { PaginationResponse, User } from '../types';
 import Homepage from '../components/Homepage';
-import _default from 'next/router';
+import handleFetch from '../helpers/fetch';
 
 interface T {
   users: PaginationResponse<User>;
@@ -14,8 +14,7 @@ const HomePage: NextPage<T> = ({ users }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const userResponse = await fetch('http://127.0.0.1:8000/users');
-    const users = await userResponse.json();
+    const users = await handleFetch({ url: '/users' });
 
     return {
       props: {

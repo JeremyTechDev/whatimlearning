@@ -15,7 +15,7 @@ const Profile = () => {
   const handleDeleteAccount = (user: User) => {
     handleDelete(
       'Are you sure you want to delete your account?\nThis action cannot be undone.',
-      `http://127.0.0.1:8000/users/${user.id}/`,
+      `/users/${user.id}/`,
     );
   };
 

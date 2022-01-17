@@ -1,5 +1,6 @@
 import router from 'next/router';
 import { AuthData, User } from '../types';
+import handleFetch from './fetch';
 
 interface AuthQuery {
   oauth_token?: string;
@@ -22,10 +23,9 @@ export const handleLogin = async (query: AuthQuery): Promise<AuthData> => {
       // remove auth params from url
       window?.history?.pushState({}, document.title, window.location.pathname);
 
-      const res = await fetch(
-        `http://127.0.0.1:8000/auth/twitter/callback?oauth_token=${token}&oauth_verifier=${verifier}`,
-      );
-      userData = await res.json();
+      userData = await handleFetch({
+        url: `/auth/twitter/callback?oauth_token=${token}&oauth_verifier=${verifier}`,
+      });
       if (userData && userData.auth_token) {
         localStorage.setItem('auth-token', userData.auth_token);
       }
@@ -41,19 +41,12 @@ export const handleLogin = async (query: AuthQuery): Promise<AuthData> => {
 
 /**
  * Gets user data using token
- * @param token User token
  * @returns User data attached to the token, null if token is invalid
  */
-export const getAuthData = async (token: string): Promise<User | null> => {
+export const getAuthData = async (): Promise<User | null> => {
   let userData: User | null = null;
   try {
-    const res = await fetch('http://127.0.0.1:8000/auth/token/', {
-      headers: { Authorization: `Token ${token}` },
-    });
-
-    if (res.status === 200) {
-      userData = await res.json();
-    }
+    userData = await handleFetch({ url: '/auth/token/', includeToken: true });
   } catch {
     userData = null;
   } finally {

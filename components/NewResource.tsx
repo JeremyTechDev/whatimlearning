@@ -4,6 +4,7 @@ import router from 'next/router';
 import LinkCard from './LinkCard';
 import { NewTechnology, ResourceCard, User } from '../types';
 import validateNewResource from '../helpers/validateNewResource';
+import handleFetch from '../helpers/fetch';
 
 const DEFAULT_RESOURCE: ResourceCard = {
   isFree: false,
@@ -48,37 +49,25 @@ const NewResource: FC<T> = ({ newTechnology, userData }) => {
     const { isValid, message } = validateNewResource(newTechnology, resources);
     if (!isValid) return alert(message);
 
-    fetch(`http://127.0.0.1:8000/users/${userData.id}/technologies/`, {
+    handleFetch({
+      url: `/users/${userData.id}/technologies/`,
       method: 'POST',
-      body: JSON.stringify(newTechnology),
-      headers: {
-        Authorization: `Token ${localStorage.getItem('auth-token')}`,
-        'Content-Type': 'application/json',
-      },
+      body: newTechnology,
+      includeToken: true,
     })
-      .then((res) => res.json())
       .then((data) =>
-        fetch(
-          `http://127.0.0.1:8000/users/${userData.id}/technologies/${data.id}/resources/`,
-          {
-            method: 'POST',
-            body: JSON.stringify(resources),
-            headers: {
-              Authorization: `Token ${localStorage.getItem('auth-token')}`,
-              'Content-Type': 'application/json',
-            },
-          },
-        ),
+        handleFetch({
+          url: `/users/${userData.id}/technologies/${data.id}/resources/`,
+          method: 'POST',
+          body: resources,
+          includeToken: true,
+        }),
       )
-      .then((res) => res.json())
-      .then((data) => {
+      .then(() => {
         alert('Learning kit published! 🚀');
         router.push('/profile');
       })
-      .catch((e) => {
-        alert('Ops! Something went wrong 😅 Try again later');
-        console.error(e);
-      });
+      .catch(() => alert('Ops! Something went wrong 😅 Try again later'));
   };
 
   return (
