@@ -10,9 +10,10 @@ interface T {
   className?: string;
   selected: User | null;
   users: PaginationResponse<User>;
+  handleToggleMenu: () => void;
 }
 
-const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
+const UserBar: NextPage<T> = ({ users, selected, handleToggleMenu, className = '' }) => {
   const [renderedUsers, setRenderedUsers] = useState(users);
   const [notFound, setNotFound] = useState(false);
 
@@ -37,6 +38,14 @@ const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
   return (
     <nav className={className}>
       <header className="p-4 pb-0 sticky top-0 bg-white z-10 shadow-lg">
+        <button
+          className="md:hidden btn text-xl float-right"
+          onClick={handleToggleMenu}
+          title="Toggle Menu"
+        >
+          ❌
+        </button>
+
         <p className="text-center text-2xl">whatImLearning 🚀</p>
         <p className="text-center text-xs px-2">
           Find out what your{' '}
@@ -67,7 +76,7 @@ const UserBar: NextPage<T> = ({ users, selected, className = '' }) => {
       </section>
 
       <footer className="p-4 text-sm text-center text-gray-400">
-        Amazing creators, right? We know 😎
+        Amazing creators, right? I know 😎
       </footer>
     </nav>
   );

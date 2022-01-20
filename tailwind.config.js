@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       transitionProperty: {
         width: 'width',
+        hidden: 'hidden',
       },
       gridTemplateColumns: {
         'landing-cards-grid': 'repeat(3, 208px)',

@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useState } from 'react';
 
 import { IsLoading, LoginRequired } from '../components/Helpers';
+import HomeBtn from '../components/HomeBtn';
 import NewResource from '../components/NewResource';
 import TechCard from '../components/TechCard';
 import useAuth from '../hooks/useAuth';
@@ -28,7 +29,10 @@ const NewTechForm = () => {
   return (
     <main className="mt-20">
       <header className="container mx-auto">
-        <h1 className="text-4xl">New Learning Kit 🚀</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl">New Learning Kit 🚀</h1>
+          <HomeBtn />
+        </div>
         <h4 className="text-xl">
           Show <span className="text-red">your audience</span> what you are
           learning and help them find your{' '}

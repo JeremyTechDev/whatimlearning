@@ -7,8 +7,12 @@ interface Props {
 
 const handleFetch = (opts: Props) => {
   const { url, method = 'GET', body = null, includeToken = false } = opts;
+  const BASE_URL =
+    process.env.NODE_ENV === 'production'
+      ? 'https://what-im-learning.herokuapp.com'
+      : 'http://127.0.0.1:8000';
 
-  return fetch(`http://127.0.0.1:8000${url}`, {
+  return fetch(`${BASE_URL}${url}`, {
     method,
     ...(body && { body: JSON.stringify(body) }),
     ...(includeToken &&

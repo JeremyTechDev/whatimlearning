@@ -4,4 +4,7 @@ module.exports = {
   images: {
     loader: 'custom',
   },
+  env: {
+    PRODUCTION_URL: process.env.PRODUCTION_URL,
+  },
 };

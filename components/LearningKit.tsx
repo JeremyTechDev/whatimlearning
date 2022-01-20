@@ -39,7 +39,9 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
         url: `/users/${user.id}/technologies`,
       })
         .then((data) => {
-          setTechnologies(data);
+          if (data?.count) {
+            setTechnologies(data);
+          }
           setIsLoading(false);
         })
         .catch(() => setIsLoading(false));
@@ -49,7 +51,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
   if (isLoading) return <IsLoading />;
 
   // No technologies screen
-  if (technologies.count === 0) return <NoTechnologies user={user} />;
+  if (technologies?.count === 0) return <NoTechnologies user={user} />;
 
   return (
     <div className="z-50">

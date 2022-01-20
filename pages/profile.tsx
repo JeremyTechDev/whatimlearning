@@ -8,6 +8,7 @@ import LearningKit from '../components/LearningKit';
 import { logout } from '../helpers/login';
 import handleDelete from '../helpers/handleDelete';
 import { DEFAULT_USER_IMAGE } from '../helpers/constants';
+import HomeBtn from '../components/HomeBtn';
 
 const Profile = () => {
   const [isLoading, userData] = useAuth();
@@ -25,7 +26,10 @@ const Profile = () => {
   return (
     <main className="container mx-auto mt-4">
       <section className="flex items-center justify-between">
-        <h1 className="text-4xl">Profile 👩‍💻👨‍💻</h1>
+        <div className="flex items-center">
+          <HomeBtn />
+          <h1 className="text-4xl">Profile 👩‍💻👨‍💻</h1>
+        </div>
 
         <div className="text-xl flex items-center">
           <h2 className="mr-4">
