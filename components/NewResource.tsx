@@ -72,17 +72,17 @@ const NewResource: FC<T> = ({ newTechnology, userData }) => {
 
   return (
     <section className="container mx-auto">
-      <h2 className="text-3xl">Resources 🌐</h2>
+      <h2 className="text-xl md:text-3xl">Resources 🌐</h2>
 
-      <h5 className="text-lg">
+      <h5 className="text-md md:text-lg">
         Add links to the resources you are using to learn
       </h5>
 
       <section className="my-8">
         <div className="grid grid-cols-12 gap-2 my-4 font-bold">
-          <p className="col-span-1 text-right">#</p>
-          <p className="col-span-9">URL</p>
-          <p className="col-span-1">Is free?</p>
+          <p className="col-span-1 text-right text-sm md:text-md">#</p>
+          <p className="col-span-7 md:col-span-8 text-sm md:text-md">URL</p>
+          <p className="col-span-1 text-sm md:text-md">Is free?</p>
           <p className="col-span-1" />
         </div>
 
@@ -94,7 +94,7 @@ const NewResource: FC<T> = ({ newTechnology, userData }) => {
             >
               <p className="col-span-1 text-right">#{index + 1}</p>
               <input
-                className="col-span-9 border rounded p-1"
+                className="col-span-7 md:col-span-8 border rounded p-1"
                 name="url"
                 onChange={(e) => handleChange(e, index)}
                 type="url"
@@ -103,11 +103,11 @@ const NewResource: FC<T> = ({ newTechnology, userData }) => {
               <input
                 type="checkbox"
                 name="isFree"
-                className="col-span-1 h-4/5 w-1/2 cursor-pointer"
+                className="col-span-1 h-4/5 w-full cursor-pointer"
                 onChange={(e) => handleChange(e, index)}
               />
               <button
-                className="btn btn--red"
+                className="btn btn--red col-span-3 md:col-span-2"
                 onClick={() => handleRemoveResource(index)}
                 title="Remove item"
               >

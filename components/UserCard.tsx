@@ -8,12 +8,13 @@ import { User } from '../types';
 interface T {
   user: User;
   isSelected: boolean;
+  handleCloseMenu: () => void;
 }
 
-const UserCard: FC<T> = ({ user, isSelected = false }) => {
+const UserCard: FC<T> = ({ user, handleCloseMenu, isSelected = false }) => {
   return (
     <Link href={`/${user.username}`} passHref>
-      <a>
+      <a onClick={handleCloseMenu}>
         <article
           className={`flex items-center my-2 px-4 hover:bg-gray-100 cursor-pointer ${
             isSelected ? 'bg-gray-100' : ''

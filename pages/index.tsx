@@ -21,7 +21,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
           <TwitterLoginBtn />
         </div>
 
-        <div className="grid px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
+        <div className="grid px-32 md:px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
           <section className="col-span-1" />
 
           <section className="md:col-span-3 text-left flex flex-col items-start justify-center">
@@ -48,7 +48,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
               <span className="text-xl cursor-pointer">➡️</span>
             </div>
 
-            <section className="grid grid-cols-landing-cards-grid gap-2">
+            <section className="grid grid-cols-sm-landing-cards-grid md:grid-cols-landing-cards-grid gap-2">
               {technologies?.results.map((tech) => (
                 <Link href={`/${tech.user.username}`} key={tech.id} passHref>
                   <a>

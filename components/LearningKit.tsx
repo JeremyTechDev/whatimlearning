@@ -55,7 +55,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
 
   return (
     <div className="z-50">
-      <h1 className="text-3xl">
+      <h1 className="text-xl md:text-3xl">
         This is what{' '}
         <a
           className="text-red font-bold hover:underline"
@@ -97,7 +97,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
           ))}
         </section>
       ) : (
-        <p className="text-xl my-4">
+        <p className="text-lg md:text-xl my-4">
           🤷‍♂️ @{user?.username} has not added any resources yet
         </p>
       )}

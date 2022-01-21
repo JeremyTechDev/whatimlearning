@@ -6,7 +6,6 @@ interface Props {
   description?: string | null;
   image?: string | null;
   title: string;
-  path?: string | null;
 }
 
 const TwitterMeta: FC<Props> = ({
@@ -15,9 +14,7 @@ const TwitterMeta: FC<Props> = ({
   description,
   image,
   title,
-  path = '',
 }) => {
-  const defaultURL = process.env.PRODUCTION_URL;
 
   return (
     <>
@@ -25,8 +22,7 @@ const TwitterMeta: FC<Props> = ({
       <meta property="og:title" content={title} />
       {creator && <meta name="twitter:creator" content={`@${creator}`} />}
       {description && <meta property="og:description" content={description} />}
-      {image && <meta property="og:image" content={image} />}
-      <meta property="og:url" content={defaultURL + path} />
+      <meta property="og:image" content={image || './favicon.ico'} />
     </>
   );
 };

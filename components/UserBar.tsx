@@ -10,10 +10,15 @@ interface T {
   className?: string;
   selected: User | null;
   users: PaginationResponse<User>;
-  handleToggleMenu: () => void;
+  handleCloseMenu: () => void;
 }
 
-const UserBar: NextPage<T> = ({ users, selected, handleToggleMenu, className = '' }) => {
+const UserBar: NextPage<T> = ({
+  users,
+  selected,
+  handleCloseMenu,
+  className = '',
+}) => {
   const [renderedUsers, setRenderedUsers] = useState(users);
   const [notFound, setNotFound] = useState(false);
 
@@ -40,7 +45,7 @@ const UserBar: NextPage<T> = ({ users, selected, handleToggleMenu, className = '
       <header className="p-4 pb-0 sticky top-0 bg-white z-10 shadow-lg">
         <button
           className="md:hidden btn text-xl float-right"
-          onClick={handleToggleMenu}
+          onClick={handleCloseMenu}
           title="Toggle Menu"
         >
           ❌
@@ -68,6 +73,7 @@ const UserBar: NextPage<T> = ({ users, selected, handleToggleMenu, className = '
 
         {renderedUsers.results.map((user) => (
           <UserCard
+            handleCloseMenu={handleCloseMenu}
             isSelected={user.id === selected?.id}
             key={user.id}
             user={user}

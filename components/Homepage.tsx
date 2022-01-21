@@ -16,7 +16,8 @@ interface T {
 const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const openMenu = () => setIsMenuOpen(true);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
@@ -30,7 +31,6 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
           }
           image={selectedUser?.profile_image}
           creator={selectedUser?.username}
-          path={'/' + (selectedUser?.username ? selectedUser.username : 'home')}
         />
       </Head>
 
@@ -41,7 +41,7 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
             isMenuOpen ? 'col-span-4' : 'hidden'
           } col-span-3 md:col-span-1 md:block h-screen overflow-y-auto`}
           selected={selectedUser}
-          handleToggleMenu={toggleMenu}
+          handleCloseMenu={closeMenu}
         />
 
         <MainLayout
@@ -51,8 +51,8 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
         >
           <p className="flex justify-between items-center mb-4">
             <button
-              className="btn md:hidden text-2xl"
-              onClick={toggleMenu}
+              className="btn md:hidden text-2xl mr-2"
+              onClick={openMenu}
               title="Toggle Menu"
             >
               🍔

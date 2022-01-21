@@ -30,19 +30,19 @@ const NewTechForm = () => {
     <main className="mt-20">
       <header className="container mx-auto">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl">New Learning Kit 🚀</h1>
+          <h1 className="text-xl md:text-4xl">New Learning Kit 🚀</h1>
           <HomeBtn />
         </div>
-        <h4 className="text-xl">
+        <h4 className="text-md md:text-xl">
           Show <span className="text-red">your audience</span> what you are
           learning and help them find your{' '}
           <span className="text-red">favorite resources</span>
         </h4>
       </header>
 
-      <section className="py-8 my-8 bg-light w-screen flex items-center justify-center gap-12">
-        <div className="w-2/5 bg-dark bg-opacity-20 rounded px-8 py-6 grid gap-6">
-          <p className="text-white text-xl">Learning Kit details:</p>
+      <section className="py-8 my-8 bg-light w-screen flex items-center justify-center md:gap-12 flex-col-reverse md:flex-row">
+        <div className="w-4/5 md:w-2/5 bg-dark bg-opacity-20 rounded px-8 py-6 grid gap-6">
+          <p className="text-white text-md md:text-xl">Learning Kit details:</p>
 
           <input
             className="new-tech-input"
@@ -62,7 +62,7 @@ const NewTechForm = () => {
           />
         </div>
 
-        <div className="w-1/5">
+        <div className="w-auto md:w-1/5">
           <TechCard technology={data} />
         </div>
       </section>

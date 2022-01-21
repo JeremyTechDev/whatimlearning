@@ -22,6 +22,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         'landing-cards-grid': 'repeat(3, 208px)',
+        'sm-landing-cards-grid': 'repeat(3, 144px)',
       },
     },
   },

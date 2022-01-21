@@ -42,7 +42,6 @@ class MyDocument extends Document {
             property="og:description"
             content="Find out what your favorite creators are learning and their favorite resources"
           />
-          <meta property="og:image" content="./favicon.ico" />
           <meta property="og:type" content="website" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

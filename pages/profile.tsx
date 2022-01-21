@@ -25,13 +25,13 @@ const Profile = () => {
 
   return (
     <main className="container mx-auto mt-4">
-      <section className="flex items-center justify-between">
+      <section className="flex items-center justify-between flex-col md:flex-row">
         <div className="flex items-center">
           <HomeBtn />
-          <h1 className="text-4xl">Profile 👩‍💻👨‍💻</h1>
+          <h1 className="text-2xl md:text-4xl">Profile 👩‍💻👨‍💻</h1>
         </div>
 
-        <div className="text-xl flex items-center">
+        <div className="text-lg md:text-xl flex items-center">
           <h2 className="mr-4">
             Logged as <span className="font-bold">@{userData.username}</span>
           </h2>
@@ -46,9 +46,9 @@ const Profile = () => {
         </div>
       </section>
 
-      <section className="flex justify-between my-8">
+      <section className="flex justify-between my-8 flex-col md:flex-row">
         <Link href="/new-tech">
-          <a className="btn btn--filled--dark">Publish new Learning Kit 🚀</a>
+          <a className="btn btn--filled--dark my-1">Publish new Learning Kit 🚀</a>
         </Link>
 
         <span className="grid grid-cols-2 gap-2">
@@ -65,7 +65,7 @@ const Profile = () => {
       </section>
 
       <section>
-        <h2 className="text-2xl">This is how your page looks 👇</h2>
+        <h2 className="text-xl md:text-2xl">This is how your page looks 👇</h2>
         <hr className="my-4" />
 
         <LearningKit user={userData} editView />
