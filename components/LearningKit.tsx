@@ -64,7 +64,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
           target="_blank"
         >
           @{user?.username}
-          <ExternalLink size="8" />
+          <ExternalLink size="32px" />
         </a>{' '}
         is learning 🚀
       </h1>

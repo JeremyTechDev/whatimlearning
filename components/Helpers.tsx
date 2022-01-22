@@ -47,7 +47,7 @@ export const NoTechnologies: FC<{ user: User | null }> = ({ user }) => (
           target="_blank"
         >
           @{user.username}
-          <ExternalLink size="5" />
+          <ExternalLink size="20px" />
         </a>{' '}
         to share what they are learning on Twitter.
       </p>
