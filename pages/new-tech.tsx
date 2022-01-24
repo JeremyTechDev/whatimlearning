@@ -34,7 +34,7 @@ const NewTechForm = () => {
           <HomeBtn />
         </div>
         <h4 className="text-md md:text-xl">
-          Show <span className="text-red">your audience</span> what you are
+          #1 Show <span className="text-red">your audience</span> what you are
           learning and help them find your{' '}
           <span className="text-red">favorite resources</span>
         </h4>
@@ -57,7 +57,7 @@ const NewTechForm = () => {
             className="new-tech-input"
             name="cover_img"
             onChange={handleChange}
-            placeholder="Image URL (we still don't support uploads ☹️)"
+            placeholder="Image URL (we still don't support uploads :c)"
             value={data.cover_img}
           />
         </div>

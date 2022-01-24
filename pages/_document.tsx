@@ -37,10 +37,14 @@ class MyDocument extends Document {
           <meta name="msapplication-starturl" content="/" />
           <meta property="og:site_name" content="WhatImLearning" />
           <meta property="og:title" content="WhatImLearning" />
-          <meta property="og:url" content="http://tsseract.askjere.com" />
+          <meta property="og:url" content="https://whatimlearning.live" />
           <meta
+            property="og:image"
+            content="https://whatimlearning.live/logo.png"
+          />
+          <meta
+            content="Find out what your favorite creators are learning and their favorite resources 🚀"
             property="og:description"
-            content="Find out what your favorite creators are learning and their favorite resources"
           />
           <meta property="og:type" content="website" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />

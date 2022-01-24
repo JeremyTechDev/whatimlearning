@@ -69,7 +69,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
         is learning 🚀
       </h1>
 
-      <section className="whitespace-nowrap overflow-x-auto ">
+      <section className="overflow-x-auto ">
         {technologies.results.map((tech) => (
           <TechCard
             key={tech.id}
@@ -83,18 +83,27 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
       </section>
 
       {selected === null ? (
-        <p className="text-xl">Click 👆 to see more!</p>
+        <p className="text-xl">Click one Learning Kit 👆 to see more!</p>
       ) : selected.resources.length ? (
-        <section className="mb-6 grid gap-4 lg:grid-cols-3">
-          {selected.resources.map((resource, i) => (
-            <LinkCard
-              index={i}
-              key={resource.id}
-              resource={{ ...resource, isFree: resource.is_free }}
-              editView={editView}
-              handleDelete={() => handleDeleteResource(selected, resource)}
-            />
-          ))}
+        <section>
+          <div className="my-8">
+            <h3 className="text-lg">
+              {selected.user.twitter_name} is learning...
+            </h3>
+            <h4 className="text-2xl font-bold">{selected.title}</h4>
+          </div>
+
+          <section className="mb-6 grid gap-4 lg:grid-cols-3">
+            {selected.resources.map((resource, i) => (
+              <LinkCard
+                index={i}
+                key={resource.id}
+                resource={{ ...resource, isFree: resource.is_free }}
+                editView={editView}
+                handleDelete={() => handleDeleteResource(selected, resource)}
+              />
+            ))}
+          </section>
         </section>
       ) : (
         <p className="text-lg md:text-xl my-4">

@@ -75,14 +75,14 @@ const NewResource: FC<T> = ({ newTechnology, userData }) => {
       <h2 className="text-xl md:text-3xl">Resources 🌐</h2>
 
       <h5 className="text-md md:text-lg">
-        Add links to the resources you are using to learn
+        #2 Add links to the resources you are using to learn
       </h5>
 
       <section className="my-8">
         <div className="grid grid-cols-12 gap-2 my-4 font-bold">
           <p className="col-span-1 text-right text-sm md:text-md">#</p>
           <p className="col-span-7 md:col-span-8 text-sm md:text-md">URL</p>
-          <p className="col-span-1 text-sm md:text-md">Is free?</p>
+          <p className="col-span-1 text-sm md:text-md">It{"'"}s free?</p>
           <p className="col-span-1" />
         </div>
 

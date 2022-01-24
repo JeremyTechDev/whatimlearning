@@ -23,10 +23,9 @@ const Homepage: NextPage<T> = ({ users, selected: selectedUser = null }) => {
     <>
       <Head>
         <TwitterMeta
-          title="WhatImLearning"
           description={
             selectedUser?.twitter_name
-              ? `See what @${selectedUser.twitter_name} is learning!`
+              ? `See what ${selectedUser.twitter_name} is learning!`
               : null
           }
           image={selectedUser?.profile_image}

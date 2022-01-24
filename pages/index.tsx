@@ -40,14 +40,6 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
           </section>
 
           <section className="md:col-span-4 whitespace-nowrap overflow-y-hidden overflow-x-scroll">
-            <div className="grid grid-cols-5 w-52 sticky left-0">
-              <span className="text-xl cursor-pointer">⬅️</span>
-              <span className="text-xl cursor-pointer">1️⃣</span>
-              <span className="text-xl cursor-pointer">2️⃣</span>
-              <span className="text-xl cursor-pointer">3️⃣</span>
-              <span className="text-xl cursor-pointer">➡️</span>
-            </div>
-
             <section className="grid grid-cols-sm-landing-cards-grid md:grid-cols-landing-cards-grid gap-2">
               {technologies?.results.map((tech) => (
                 <Link href={`/${tech.user.username}`} key={tech.id} passHref>

@@ -37,7 +37,7 @@ const TechCard: FC<T> = ({
           <p>No Image</p>
         </div>
       )}
-      <figcaption>{technology.title}</figcaption>
+      <figcaption className='break-words'>{technology.title}</figcaption>
       {editView && (
         <button onClick={handleDelete} className="btn btn--red w-full">
           Delete
