@@ -69,7 +69,7 @@ const LearningKit: FC<T> = ({ user, editView = false }) => {
         is learning 🚀
       </h1>
 
-      <section className="overflow-x-auto ">
+      <section className="whitespace-nowrap overflow-x-auto">
         {technologies.results.map((tech) => (
           <TechCard
             key={tech.id}

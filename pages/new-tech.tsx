@@ -30,7 +30,7 @@ const NewTechForm = () => {
     <main className="mt-20">
       <header className="container mx-auto">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl md:text-4xl">New Learning Kit 🚀</h1>
+          <h1 className="text-lg md:text-3xl">New Learning Kit 🚀</h1>
           <HomeBtn />
         </div>
         <h4 className="text-md md:text-xl">

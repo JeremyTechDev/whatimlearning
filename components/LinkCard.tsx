@@ -16,7 +16,7 @@ const LinkCard: FC<T> = ({ resource, index, editView = false, handleDelete }) =>
       <div className="font-bold flex items-center justify-between">
         <span>#{index + 1}</span>
         {editView && (
-          <button onClick={handleDelete} className="btn btn--red">
+          <button onClick={handleDelete} className="btn btn--filled--red">
             Delete
           </button>
         )}

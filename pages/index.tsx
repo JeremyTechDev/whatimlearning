@@ -21,7 +21,7 @@ const LandingPage: NextPage<T> = ({ technologies }) => {
           <TwitterLoginBtn />
         </div>
 
-        <div className="grid px-32 md:px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
+        <div className="grid px-8 md:px-2 md:px-none grid-cols-1 md:grid-cols-8 gap-16 md:pt-16 pb-12 md:pb-24">
           <section className="col-span-1" />
 
           <section className="md:col-span-3 text-left flex flex-col items-start justify-center">

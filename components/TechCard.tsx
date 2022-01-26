@@ -20,7 +20,8 @@ const TechCard: FC<T> = ({
   return (
     <figure
       onClick={onClick}
-      className={`tech-card ${isSelected ? 'tech-card--active' : ''}`}
+      title={technology.title}
+      className={`tech-card relative ${isSelected ? 'tech-card--active' : ''}`}
     >
       {technology.cover_img ? (
         <Image
@@ -37,9 +38,8 @@ const TechCard: FC<T> = ({
           <p>No Image</p>
         </div>
       )}
-      <figcaption className='break-words'>{technology.title}</figcaption>
       {editView && (
-        <button onClick={handleDelete} className="btn btn--red w-full">
+        <button onClick={handleDelete} className="btn btn--filled--red m-2 absolute z-50 bottom-0 right-0">
           Delete
         </button>
       )}
