@@ -40,7 +40,7 @@ class MyDocument extends Document {
           <meta property="og:url" content="https://whatimlearning.live" />
           <meta
             property="og:image"
-            content="https://whatimlearning.live/logo.png"
+            content="https://whatimlearning.live/frame.png"
           />
           <meta
             content="Find out what your favorite creators are learning and their favorite resources 🚀"
